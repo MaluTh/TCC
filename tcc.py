@@ -36,7 +36,7 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 10):
+        for i in range(0, 1000):
             print(trainer.train())
 
     # função para coletar novos dados e ser testados pela rede neural
@@ -81,13 +81,14 @@ class TCC(BotPlugin):
                             linha[5]) + '\n' + 'container_fs_writes_bytes_total: ' + str(linha[6]) + '\n' + 'container_network_receive_bytes_total: ' + str(linha[7]) + '\n' + 'container_network_transmit_bytes_total: ' + str(linha[8])
                         self.warn_admins(nova_saida)
                         break
-        self.warn_admins('Métricas com alto consumo de recurso no arquivo', metricas_altas)
-        self.warn_admins('Métricas com alto consumo de recurso classificadas pela RNA', metricas_altas_classificadas)
-        self.warn_admins('Taxa de acerto: ', ((metricas_altas_classificadas/metricas_altas)*100))
+        self.warn_admins('Métricas com alto consumo de recurso no arquivo', str(metricas_altas))
+        self.warn_admins('Métricas com alto consumo de recurso classificadas pela RNA', str(metricas_altas_classificadas))
+        taxa = (metricas_altas_classificadas/metricas_altas)*100
+        self.warn_admins('Taxa de acerto: ', str(taxa))
 
     # função que irá chamar as outras funções
     def activate(self):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
         self.treinar()
-        self.start_poller(60, self.novos_dados)
+        self.start_poller(600, self.novos_dados)
