@@ -1,0 +1,9 @@
+[Core]
+Name = TCC
+Module = tcc
+
+[Documentation]
+Description = TCC de Maria Luiza Theisges
+
+[Python]
+Version = 3
