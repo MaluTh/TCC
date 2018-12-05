@@ -36,7 +36,7 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 10):
+        for i in range(0, 300):
             print(trainer.train())
 
     # função para coletar novos dados e ser testados pela rede neural
