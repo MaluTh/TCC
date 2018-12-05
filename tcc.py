@@ -36,7 +36,7 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 1000):
+        for i in range(0, 10):
             print(trainer.train())
 
     # função para coletar novos dados e ser testados pela rede neural
@@ -59,7 +59,7 @@ class TCC(BotPlugin):
         e4 = values[:, 6:7]
         e5 = values[:, 7:8]
         e6 = values[:, 8:9]
-         
+
         for e1, e2, e3, e4, e5, e6 in zip(e1, e2, e3, e4, e5, e6):
             if (e1 > 0.5) or (e2 > 0.5) or (e3 > 0.5) or (e4 > 0.5) or (e5 > 0.5) or (e6 > 0.5):
                 metricas_altas = metricas_altas + 1
@@ -90,4 +90,4 @@ class TCC(BotPlugin):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
         self.treinar()
-        self.start_poller(3600, self.novos_dados)
+        self.start_poller(60, self.novos_dados)
