@@ -20,7 +20,7 @@ class ImportData:
             'container_network_transmit_bytes_total'
         ]
 
-        client = MongoClient().prometheus.containers
+        client = MongoClient(host='mongodb').prometheus.containers
 
         self.prometheus2mongo(metrics, client)
         self.mongo2csv(metrics, client)
