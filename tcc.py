@@ -81,10 +81,10 @@ class TCC(BotPlugin):
                             linha[5]) + '\n' + 'container_fs_writes_bytes_total: ' + str(linha[6]) + '\n' + 'container_network_receive_bytes_total: ' + str(linha[7]) + '\n' + 'container_network_transmit_bytes_total: ' + str(linha[8])
                         self.warn_admins(nova_saida)
                         break
-        self.warn_admins('Métricas com alto consumo de recurso no arquivo', str(metricas_altas))
-        self.warn_admins('Métricas com alto consumo de recurso classificadas pela RNA', str(metricas_altas_classificadas))
+        self.warn_admins('Métricas com alto consumo de recurso no arquivo' +  str(metricas_altas))
+        self.warn_admins('Métricas com alto consumo de recurso classificadas pela RNA' + str(metricas_altas_classificadas))
         taxa = (metricas_altas_classificadas/metricas_altas)*100
-        self.warn_admins('Taxa de acerto: ', str(taxa))
+        self.warn_admins('Taxa de acerto: ' +  str(taxa))
 
     # função que irá chamar as outras funções
     def activate(self):
