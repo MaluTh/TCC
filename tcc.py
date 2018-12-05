@@ -42,6 +42,8 @@ class TCC(BotPlugin):
     # função para coletar novos dados e ser testados pela rede neural
     @botcmd(split_args_with=None)
     def novos_dados(self):
+        metricas_altas = 0
+        metricas_altas_classificadas = 0
 
         gera_novo_dado = ImportData()
 
@@ -57,9 +59,15 @@ class TCC(BotPlugin):
         e4 = values[:, 6:7]
         e5 = values[:, 7:8]
         e6 = values[:, 8:9]
-
+         
         for e1, e2, e3, e4, e5, e6 in zip(e1, e2, e3, e4, e5, e6):
+            if (e1 > 0.5) or (e2 > 0.5) or (e3 > 0.5) or (e4 > 0.5) or (e5 > 0.5) or (e6 > 0.5):
+                metricas_altas = metricas_altas + 1
+
             z = self.nn.activate((e1, e2, e3, e4, e5, e6))
+            if z > 0.5:
+                metricas_altas_classificadas = metricas_altas_classificadas + 1
+
             if z > 0.5:
                 self.warn_admins('O consumo de recursos está alto em:')
 
@@ -73,6 +81,9 @@ class TCC(BotPlugin):
                             linha[5]) + '\n' + 'container_fs_writes_bytes_total: ' + str(linha[6]) + '\n' + 'container_network_receive_bytes_total: ' + str(linha[7]) + '\n' + 'container_network_transmit_bytes_total: ' + str(linha[8])
                         self.warn_admins(nova_saida)
                         break
+        self.warn_admins('Métricas com alto consumo de recurso no arquivo', metricas_altas)
+        self.warn_admins('Métricas com alto consumo de recurso classificadas pela RNA', metricas_altas_classificadas)
+        self.warn_admins('Taxa de acerto: ', ((metricas_altas_classificadas/metricas_altas)*100))
 
     # função que irá chamar as outras funções
     def activate(self):
