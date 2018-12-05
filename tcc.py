@@ -2,10 +2,10 @@
 from errbot import BotPlugin, botcmd
 from pandas import read_csv
 from pandas import concat
-from pybrain.tools.shortcuts import buildNetwork
-from pybrain.datasets import SupervisedDataSet
-from pybrain.supervised.trainers import BackpropTrainer
-from pybrain.tools.neuralnets import NNclassifier
+from pybrain3.tools.shortcuts import buildNetwork
+from pybrain3.datasets import SupervisedDataSet
+from pybrain3.supervised.trainers import BackpropTrainer
+from pybrain3.tools.neuralnets import NNclassifier
 from ImportData import ImportData
 import numpy
 import time
