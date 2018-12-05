@@ -37,7 +37,6 @@ class ImportData:
         if start_time:
             start = start_time
         else:
-
             start_datetime = end_datetime - datetime.timedelta(seconds=1800)
             start = str(start_datetime.strftime("%Y-%m-%dT%H:%M:%SZ"))
 

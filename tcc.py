@@ -36,7 +36,7 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 1000):
+        for i in range(0, 10):
             print(trainer.train())
 
     # função para coletar novos dados e ser testados pela rede neural
@@ -77,18 +77,19 @@ class TCC(BotPlugin):
                     if (nova_info[0] == linha[3]) and (nova_info[1] == linha[4]) and (nova_info[2] == linha[5]) and (nova_info[3] == linha[6]) and (nova_info[4] == linha[7]) and (nova_info[5] == linha[8]):
                         data = datetime.date.fromtimestamp(linha[2])
                         datacerta = data.strftime("%d/%m/%Y")
-                        nova_saida = 'POD: ' + str(linha[1]) + '\n' + 'Data: ' + str(datacerta) + '\n' + 'container_cpu_usage_seconds_total: ' + str(linha[3]) + '\n' + 'container_memory_usage_bytes: ' + str(linha[4]) + '\n' + 'container_fs_reads_bytes_total: ' + str(
-                            linha[5]) + '\n' + 'container_fs_writes_bytes_total: ' + str(linha[6]) + '\n' + 'container_network_receive_bytes_total: ' + str(linha[7]) + '\n' + 'container_network_transmit_bytes_total: ' + str(linha[8])
+                        nova_saida = 'POD: ' + str(linha[1]) + '\n' + 'Data: ' + str(datacerta) + '\n' + 'container_cpu_usage_seconds_total: ' + str(linha[3]) + '\n' + 'container_memory_usage_bytes: ' + str(linha[4]) + '\n' + 'container_fs_reads_bytes_total: ' + str(linha[5]) + '\n' + 'container_fs_writes_bytes_total: ' + str(linha[6]) + '\n' + 'container_network_receive_bytes_total: ' + str(linha[7]) + '\n' + 'container_network_transmit_bytes_total: ' + str(linha[8])
                         self.warn_admins(nova_saida)
                         break
-        self.warn_admins('Métricas com alto consumo de recurso no arquivo' +  str(metricas_altas))
-        self.warn_admins('Métricas com alto consumo de recurso classificadas pela RNA' + str(metricas_altas_classificadas))
+        self.warn_admins(
+            'Métricas com alto consumo de recurso no arquivo: ' + str(metricas_altas))
+        self.warn_admins(
+            'Métricas com alto consumo de recurso classificadas pela RNA: ' + str(metricas_altas_classificadas))
         taxa = (metricas_altas_classificadas/metricas_altas)*100
-        self.warn_admins('Taxa de acerto: ' +  str(taxa))
+        self.warn_admins('Taxa de acerto: ' + str(taxa))
 
     # função que irá chamar as outras funções
     def activate(self):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
         self.treinar()
-        self.start_poller(600, self.novos_dados)
+        self.start_poller(60, self.novos_dados)
