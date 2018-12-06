@@ -101,42 +101,42 @@ class ImportData:
                 if cursor:
 
                     if metric == 'container_cpu_usage_seconds_total':
-                        teste = float(cursor['value'])/571271.996154514
+                        teste = (float(cursor['value'])-0.005690769)/(760745.954744477)
                         if teste > 1:
                             csv += ',' + str(1)
                         else:
                             csv += ',' + str(teste)
 
                     elif metric == 'container_memory_usage_bytes':
-                        teste = float(cursor['value'])/12707532800
+                        teste = float(cursor['value'])/5280600064
                         if teste > 1:
                             csv += ',' + str(1)
                         else:
                             csv += ',' + str(teste)
 
                     elif metric == 'container_fs_reads_bytes_total':
-                        teste = float(cursor['value'])/1372745728
+                        teste = float(cursor['value'])/1002991616
                         if teste > 1:
                             csv += ',' + str(1)
                         else:
                             csv += ',' + str(teste)
 
                     elif metric == 'container_fs_writes_bytes_total':
-                        teste = float(cursor['value'])/54412820480
+                        teste = float(cursor['value'])/125418770432
                         if teste > 1:
                             csv += ',' + str(1)
                         else:
                             csv += ',' + str(teste)
 
                     elif metric == 'container_network_receive_bytes_total':
-                        teste = float(cursor['value'])/177387492901
+                        teste = float(cursor['value'])/164210605194
                         if teste > 1:
                             csv += ',' + str(1)
                         else:
                             csv += ',' + str(teste)
 
                     elif metric == 'container_network_transmit_bytes_total':
-                        teste = float(cursor['value'])/176517691053
+                        teste = float(cursor['value'])/155667541052
                         if teste > 1:
                             csv += ',' + str(1)
                         else:
