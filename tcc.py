@@ -38,8 +38,7 @@ class TCC(BotPlugin):
 
         for i in range(0, 20):
             n = trainer.train()
-            
-        self.warn_admins(n)
+            self.warn_admins(n)
 
     # função para coletar novos dados e ser testados pela rede neural
     @botcmd(split_args_with=None)
