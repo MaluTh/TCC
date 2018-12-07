@@ -45,10 +45,11 @@ class TCC(BotPlugin):
         metricas_altas = 0
         metricas_altas_classificadas = 0
 
-        gera_novo_dado = ImportData()
+        #gera_novo_dado = ImportData()
 
-        newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
-
+        #newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
+        newdata = read_csv('data/plugins/MaluTh/tcc/saida.csv')
+        
         values = newdata.values
 
         nova_entrada = values[:, :]
