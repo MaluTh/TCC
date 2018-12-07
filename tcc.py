@@ -68,7 +68,7 @@ class TCC(BotPlugin):
             z = self.nn.activate((e1, e2, e3, e4, e5, e6))
             if z > 0.5:
                 if (e1 < 0.5) and (e2 < 0.5) and (e3 < 0.5) and (e4 < 0.5) and (e5 < 0.5) and (e6 < 0.5):
-                     falso_positivo = flaso_positivo + 1
+                    falso_positivo = falso_positivo + 1
 
             if z > 0.5:
                 self.warn_admins('O consumo de recursos está alto em:')
