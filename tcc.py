@@ -44,14 +44,13 @@ class TCC(BotPlugin):
     # função para coletar novos dados e ser testados pela rede neural
     @botcmd(split_args_with=None)
     def novos_dados(self):
-        metricas_altas = 0
-        metricas_altas_classificadas = 0
+        falso_positivo = 0
 
         gera_novo_dado = ImportData()
 
         newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
         #newdata = read_csv('data/plugins/MaluTh/tcc/saida.csv')
-        
+        total = len(new_data)
         values = newdata.values
 
         nova_entrada = values[:, :]
@@ -64,12 +63,12 @@ class TCC(BotPlugin):
         e6 = values[:, 8:9]
 
         for e1, e2, e3, e4, e5, e6 in zip(e1, e2, e3, e4, e5, e6):
-            if (e1 > 0.5) or (e2 > 0.5) or (e3 > 0.5) or (e4 > 0.5) or (e5 > 0.5) or (e6 > 0.5):
-                metricas_altas = metricas_altas + 1
+            
 
             z = self.nn.activate((e1, e2, e3, e4, e5, e6))
             if z > 0.5:
-                metricas_altas_classificadas = metricas_altas_classificadas + 1
+                if (e1 < 0.5) and (e2 < 0.5) and (e3 < 0.5) and (e4 < 0.5) and (e5 < 0.5) and (e6 < 0.5):
+                     falso_positivo = flaso_positivo + 1
 
             if z > 0.5:
                 self.warn_admins('O consumo de recursos está alto em:')
@@ -83,12 +82,10 @@ class TCC(BotPlugin):
                         nova_saida = 'POD: ' + str(linha[1]) + '\n' + 'Data: ' + str(datacerta) + '\n' + 'container_cpu_usage_seconds_total: ' + str(linha[3]) + '\n' + 'container_memory_usage_bytes: ' + str(linha[4]) + '\n' + 'container_fs_reads_bytes_total: ' + str(linha[5]) + '\n' + 'container_fs_writes_bytes_total: ' + str(linha[6]) + '\n' + 'container_network_receive_bytes_total: ' + str(linha[7]) + '\n' + 'container_network_transmit_bytes_total: ' + str(linha[8])
                         self.warn_admins(nova_saida)
                         break
-        self.warn_admins(
-            'Métricas com alto consumo de recurso no arquivo: ' + str(metricas_altas))
-        self.warn_admins(
-            'Métricas com alto consumo de recurso classificadas pela RNA: ' + str(metricas_altas_classificadas))
-        taxa = (metricas_altas_classificadas/metricas_altas)*100
-        self.warn_admins('Taxa de acerto: ' + str(taxa))
+        self.warn_admins('Falsos positivos ' + str(falso_positivo))
+        erro = falso_positivo/total
+        acerto = (1 - erro)*100
+        self.warn_admins('Taxa de acerto: ' + str(acerto))
 
     # função que irá chamar as outras funções
     def activate(self):
