@@ -36,8 +36,10 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 500):
-            print(trainer.train())
+        for i in range(0, 20):
+            n = trainer.train()
+            
+        self.warn_admins(n)
 
     # função para coletar novos dados e ser testados pela rede neural
     @botcmd(split_args_with=None)
