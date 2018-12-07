@@ -47,10 +47,10 @@ class TCC(BotPlugin):
         metricas_altas = 0
         metricas_altas_classificadas = 0
 
-        #gera_novo_dado = ImportData()
+        gera_novo_dado = ImportData()
 
-        #newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
-        newdata = read_csv('data/plugins/MaluTh/tcc/saida.csv')
+        newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
+        #newdata = read_csv('data/plugins/MaluTh/tcc/saida.csv')
         
         values = newdata.values
 
@@ -95,4 +95,4 @@ class TCC(BotPlugin):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
         self.treinar()
-        self.start_poller(600, self.novos_dados)
+        self.start_poller(60, self.novos_dados)
