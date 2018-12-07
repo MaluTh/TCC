@@ -64,7 +64,6 @@ class TCC(BotPlugin):
 
         for e1, e2, e3, e4, e5, e6 in zip(e1, e2, e3, e4, e5, e6):
             
-
             z = self.nn.activate((e1, e2, e3, e4, e5, e6))
             if z > 0.5:
                 if (e1 < 0.5) and (e2 < 0.5) and (e3 < 0.5) and (e4 < 0.5) and (e5 < 0.5) and (e6 < 0.5):
