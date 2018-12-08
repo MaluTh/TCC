@@ -30,14 +30,14 @@ class TCC(BotPlugin):
 
         ds = SupervisedDataSet(6, 1)
 
-        self.nn = buildNetwork(6, 6, 1, bias=True)
+        #self.nn = buildNetwork(6, 6, 1, bias=True)
 
         for n, s in zip(entradas, saida):
             ds.addSample(n, s)
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 1000):
+        for i in range(0, 10):
             n = trainer.train()
             self.warn_admins(str(n))
 
@@ -104,5 +104,5 @@ class TCC(BotPlugin):
     def activate(self):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
-        #self.treinar()
+        self.treinar()
         self.start_poller(60, self.novos_dados)
