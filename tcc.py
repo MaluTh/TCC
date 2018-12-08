@@ -71,11 +71,15 @@ class TCC(BotPlugin):
                 if (e1 < 0.5) and (e2 < 0.5) and (e3 < 0.5) and (e4 < 0.5) and (e5 < 0.5) and (e6 < 0.5):
                     falso_positivo_alto = falso_positivo_alto + 1
             elif z < 0.5:
-                 if (e1 > 0.5) and (e2 > 0.5) and (e3 > 0.5) and (e4 > 0.5) and (e5 > 0.5) and (e6 > 0.5):
-                     falso_positivo_medio = falso_positivo_medio + 1
+                if (e1 > 0.5) and (e2 > 0.5) and (e3 > 0.5) and (e4 > 0.5) and (e5 > 0.5) and (e6 > 0.5):
+                    falso_positivo_medio = falso_positivo_medio + 1
+                elif (e1 < 0.1) and (e2 < 0.1) and (e3 < 0.1) and (e4 < 0.1) and (e5 < 0.1) and (e6 < 0.1):
+                    falso_positivo_medio = falso_positivo_medio + 1
+                else:
+                    pass
             else: 
                 if (e1 > 0.1) and (e2 > 0.1) and (e3 > 0.1) and (e4 > 0.1) and (e5 > 0.1) and (e6 > 0.1):
-                     falso_positivo_baixo = falso_positivo_baixo + 1
+                    falso_positivo_baixo = falso_positivo_baixo + 1
             
             if z > 0.5:
                 self.warn_admins('O consumo de recursos está alto em:')
