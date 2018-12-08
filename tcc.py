@@ -50,7 +50,7 @@ class TCC(BotPlugin):
 
         newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
         #newdata = read_csv('data/plugins/MaluTh/tcc/saida.csv')
-        total = len(new_data)
+        total = len(newdata)
         values = newdata.values
 
         nova_entrada = values[:, :]
