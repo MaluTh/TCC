@@ -44,8 +44,10 @@ class TCC(BotPlugin):
     # função para coletar novos dados e ser testados pela rede neural
     @botcmd(split_args_with=None)
     def novos_dados(self):
-        falso_positivo = 0
-
+        falso_positivo_alto = 0
+        falso_positivo_medio = 0
+        falso_positivo_baixo = 0
+        
         gera_novo_dado = ImportData()
 
         newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
@@ -67,8 +69,14 @@ class TCC(BotPlugin):
             z = self.nn.activate((e1, e2, e3, e4, e5, e6))
             if z > 0.5:
                 if (e1 < 0.5) and (e2 < 0.5) and (e3 < 0.5) and (e4 < 0.5) and (e5 < 0.5) and (e6 < 0.5):
-                    falso_positivo = falso_positivo + 1
-
+                    falso_positivo_alto = falso_positivo_alto + 1
+            elif z < 0.5:
+                 if (e1 > 0.5) and (e2 > 0.5) and (e3 > 0.5) and (e4 > 0.5) and (e5 > 0.5) and (e6 > 0.5):
+                     falso_positivo_medio = falso_positivo_medio + 1
+            else: 
+                if (e1 > 0.1) and (e2 > 0.1) and (e3 > 0.1) and (e4 > 0.1) and (e5 > 0.1) and (e6 > 0.1):
+                     falso_positivo_baixo = falso_positivo_baixo + 1
+            
             if z > 0.5:
                 self.warn_admins('O consumo de recursos está alto em:')
 
@@ -82,7 +90,7 @@ class TCC(BotPlugin):
                         self.warn_admins(nova_saida)
                         break
         self.warn_admins('Falsos positivos ' + str(falso_positivo))
-        erro = falso_positivo/total
+        erro = (falso_positivo_alto + falso_positivo_medio + falso_positivo_baixo)/total
         acerto = (1 - erro)*100
         self.warn_admins('Taxa de acerto: ' + str(acerto))
 
