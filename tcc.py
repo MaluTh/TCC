@@ -93,10 +93,10 @@ class TCC(BotPlugin):
                         nova_saida = 'POD: ' + str(linha[1]) + '\n' + 'Data: ' + str(datacerta) + '\n' + 'container_cpu_usage_seconds_total: ' + str(linha[3]) + '\n' + 'container_memory_usage_bytes: ' + str(linha[4]) + '\n' + 'container_fs_reads_bytes_total: ' + str(linha[5]) + '\n' + 'container_fs_writes_bytes_total: ' + str(linha[6]) + '\n' + 'container_network_receive_bytes_total: ' + str(linha[7]) + '\n' + 'container_network_transmit_bytes_total: ' + str(linha[8])
                         self.warn_admins(nova_saida)
                         break
-        #self.warn_admins('Falsos positivos ' + str(falso_positivo))
+        self.warn_admins('Falsos positivos: ' + str((falso_positivo_alto + falso_positivo_medio + falso_positivo_baixo)))
         erro = (falso_positivo_alto + falso_positivo_medio + falso_positivo_baixo)/total
         acerto = (1 - erro)*100
-        self.warn_admins('Taxa de acerto: ' + str(acerto))
+        self.warn_admins('Taxa de acerto: ' + str(acerto) + '%')
 
     # função que irá chamar as outras funções
     def activate(self):
