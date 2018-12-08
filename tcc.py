@@ -44,6 +44,7 @@ class TCC(BotPlugin):
     # função para coletar novos dados e ser testados pela rede neural
     @botcmd(split_args_with=None)
     def novos_dados(self):
+        self.warn_admins('Novos dados... ')
         falso_positivo_alto = 0
         falso_positivo_medio = 0
         falso_positivo_baixo = 0
@@ -67,6 +68,7 @@ class TCC(BotPlugin):
         for e1, e2, e3, e4, e5, e6 in zip(e1, e2, e3, e4, e5, e6):
             
             z = self.nn.activate((e1, e2, e3, e4, e5, e6))
+            self.warn_admins('Teste...')
             if z > 0.5:
                 if (e1 < 0.5) and (e2 < 0.5) and (e3 < 0.5) and (e4 < 0.5) and (e5 < 0.5) and (e6 < 0.5):
                     falso_positivo_alto = falso_positivo_alto + 1
@@ -102,5 +104,5 @@ class TCC(BotPlugin):
     def activate(self):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
-        self.treinar()
-        self.start_poller(1800, self.novos_dados)
+        #self.treinar()
+        self.start_poller(60, self.novos_dados)
