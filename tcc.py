@@ -18,8 +18,8 @@ class TCC(BotPlugin):
     # função para treinar a rede neural
     def treinar(self):
         self.warn_admins('Treinando a rede...')
-        #dataset = read_csv('data/plugins/MaluTh/tcc/saida.csv')
-        dataset = read_csv('data/plugins/MaluTh/tcc/saida_mod.csv')
+        dataset = read_csv('data/plugins/MaluTh/tcc/saida.csv')
+        #dataset = read_csv('data/plugins/MaluTh/tcc/saida_mod.csv')
         values = dataset.values
 
         entradas = values[:, 3:9]
