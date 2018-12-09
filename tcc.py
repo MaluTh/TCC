@@ -39,7 +39,7 @@ class TCC(BotPlugin):
 
         for i in range(0, 500):
             n = trainer.train()
-            self.warn_admins(str(n))
+            #self.warn_admins(str(n))
             
         self.warn_admins('Treinamento finalizado')
         
