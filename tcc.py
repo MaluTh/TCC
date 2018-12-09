@@ -18,8 +18,8 @@ class TCC(BotPlugin):
     # função para treinar a rede neural
     def treinar(self):
         self.warn_admins('Treinando a rede...')
-        #dataset = read_csv('data/plugins/MaluTh/tcc/saida.csv')
-        dataset = read_csv('data/plugins/MaluTh/tcc/saida_mod1.csv')
+        dataset = read_csv('data/plugins/MaluTh/tcc/saida.csv')
+        
         values = dataset.values
 
         entradas = values[:, 3:9]
@@ -37,10 +37,12 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 40):
+        for i in range(0, 10):
             n = trainer.train()
-            self.warn_admins(str(n))
-
+            #self.warn_admins(str(n))
+            
+        self.warn_admins('Treinamento finalizado')
+        
     # função para coletar novos dados e ser testados pela rede neural
     @botcmd(split_args_with=None)
     def novos_dados(self):
@@ -52,7 +54,7 @@ class TCC(BotPlugin):
         gera_novo_dado = ImportData()
 
         newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
-        #newdata = read_csv('data/plugins/MaluTh/tcc/saida.csv')
+        
         total = len(newdata)
         values = newdata.values
 
@@ -103,6 +105,6 @@ class TCC(BotPlugin):
     # função que irá chamar as outras funções
     def activate(self):
         super().activate()
-        self.nn = buildNetwork(6, 12, 1, bias=True)
+        self.nn = buildNetwork(6, 6, 1, bias=True)
         self.treinar()
-        self.start_poller(60, self.novos_dados)
+        self.start_poller(3600, self.novos_dados)
