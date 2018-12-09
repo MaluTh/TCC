@@ -103,6 +103,6 @@ class TCC(BotPlugin):
     # função que irá chamar as outras funções
     def activate(self):
         super().activate()
-        self.nn = buildNetwork(6, 6, 1, bias=True)
+        self.nn = buildNetwork(6, 12, 1, bias=True)
         self.treinar()
         self.start_poller(60, self.novos_dados)
