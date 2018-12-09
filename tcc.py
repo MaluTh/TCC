@@ -18,8 +18,8 @@ class TCC(BotPlugin):
     # função para treinar a rede neural
     def treinar(self):
         self.warn_admins('Treinando a rede...')
-        dataset = read_csv('data/plugins/MaluTh/tcc/saida.csv')
-        
+        #dataset = read_csv('data/plugins/MaluTh/tcc/saida.csv')
+        dataset = read_csv('data/plugins/MaluTh/tcc/saida_balanceada.csv')
         values = dataset.values
 
         entradas = values[:, 3:9]
@@ -37,9 +37,9 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.2, momentum=0.8)
 
-        for i in range(0, 300):
+        for i in range(0, 4):
             n = trainer.train()
-            #self.warn_admins(str(n))
+            self.warn_admins(str(n))
             
         self.warn_admins('Treinamento finalizado')
         
