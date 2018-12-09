@@ -35,7 +35,7 @@ class TCC(BotPlugin):
         for n, s in zip(entradas, saida):
             ds.addSample(n, s)
 
-        trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
+        trainer = BackpropTrainer(self.nn, ds, learningrate=0.2, momentum=0.8)
 
         for i in range(0, 300):
             n = trainer.train()
@@ -107,4 +107,4 @@ class TCC(BotPlugin):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
         self.treinar()
-        self.start_poller(1800, self.novos_dados)
+        self.start_poller(600, self.novos_dados)
