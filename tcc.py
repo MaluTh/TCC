@@ -37,7 +37,7 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.2, momentum=0.8)
 
-        for i in range(0, 4):
+        for i in range(0, 500):
             n = trainer.train()
             self.warn_admins(str(n))
             
