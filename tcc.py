@@ -37,7 +37,7 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.2, momentum=0.8)
 
-        for i in range(0, 500):
+        for i in range(0, 10):
             n = trainer.train()
             #self.warn_admins(str(n))
             
@@ -69,7 +69,7 @@ class TCC(BotPlugin):
 
         for e1, e2, e3, e4, e5, e6 in zip(e1, e2, e3, e4, e5, e6):
             
-            z = self.nn.activate((e1, e2, e3, e4, e5, e6))
+            z = self.nn.activate((e1, e2, e3, e4, e5, e6))[0]
             
             if z > 0.5:
                 if (e1 < 0.5) and (e2 < 0.5) and (e3 < 0.5) and (e4 < 0.5) and (e5 < 0.5) and (e6 < 0.5):
@@ -107,4 +107,4 @@ class TCC(BotPlugin):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
         self.treinar()
-        self.start_poller(600, self.novos_dados)
+        self.start_poller(60, self.novos_dados)
