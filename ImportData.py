@@ -145,7 +145,7 @@ class ImportData:
                     else:
                         csv += ',' + cursor['value']
                 else:
-                    csv += ','
+                    csv += ',' + str(0)
             output.write(csv + '\n')
             counter += 1
         output.close()
