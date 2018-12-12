@@ -83,7 +83,7 @@ class ImportData:
             containers.add(item['name'] + ',' +
                            item['namespace'] + ',' + str(item['timestamp']))
 
-        output = open('data/plugins/MaluTh/tcc/nova_saida.csv', 'w')
+        output = open('data/plugins/MaluTh/tcc/novasaida.csv', 'w')
         output.write('pod,namespace,timestamp')
         for metric in metrics:
             output.write(',' + metric)
