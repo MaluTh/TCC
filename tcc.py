@@ -53,8 +53,9 @@ class TCC(BotPlugin):
         self.warn_admins('Coletando novos dados... ')
         gera_novo_dado = ImportData()
         self.warn_admins('Coleta finalizada!... ')
-        
+        self.warn_admins('Lendo arquivo!... ')
         newdata = read_csv('data/plugins/MaluTh/tcc/novasaida.csv')
+        self.warn_admins('leitura finalizada!... ')
         
         total = len(newdata)
         values = newdata.values
