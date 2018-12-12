@@ -79,8 +79,8 @@ class TCC(BotPlugin):
                     falso_positivo_medio = falso_positivo_medio + 1
                 elif (e1 < 0.1) and (e2 < 0.1) and (e3 < 0.1) and (e4 < 0.1) and (e5 < 0.1) and (e6 < 0.1):
                     falso_positivo_medio = falso_positivo_medio + 1
-                else:
-                    pass
+                #else:
+                    #pass
             else: 
                 if (e1 > 0.1) and (e2 > 0.1) and (e3 > 0.1) and (e4 > 0.1) and (e5 > 0.1) and (e6 > 0.1):
                     falso_positivo_baixo = falso_positivo_baixo + 1
