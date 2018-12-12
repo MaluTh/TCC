@@ -53,7 +53,7 @@ class TCC(BotPlugin):
         
         gera_novo_dado = ImportData()
 
-        newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
+        newdata = read_csv('data/plugins/MaluTh/tcc/novasaida.csv')
         
         total = len(newdata)
         values = newdata.values
