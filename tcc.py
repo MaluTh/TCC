@@ -51,7 +51,7 @@ class TCC(BotPlugin):
         falso_positivo_medio = 0
         falso_positivo_baixo = 0
         
-        #gera_novo_dado = ImportData()
+        gera_novo_dado = ImportData()
         
         newdata = read_csv('data/plugins/MaluTh/tcc/nova_saida.csv')
         
