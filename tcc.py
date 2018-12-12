@@ -37,7 +37,7 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 80):
+        for i in range(0, 10):
             n = trainer.train()
             #self.warn_admins(str(n))
             
@@ -50,9 +50,10 @@ class TCC(BotPlugin):
         falso_positivo_alto = 0
         falso_positivo_medio = 0
         falso_positivo_baixo = 0
-        
+        self.warn_admins('Coletando novos dados... ')
         gera_novo_dado = ImportData()
-
+        self.warn_admins('Coleta finalizada!... ')
+        
         newdata = read_csv('data/plugins/MaluTh/tcc/novasaida.csv')
         
         total = len(newdata)
