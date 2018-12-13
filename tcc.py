@@ -37,7 +37,7 @@ class TCC(BotPlugin):
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 10):
+        for i in range(0, 1000):
             n = trainer.train()
             #self.warn_admins(str(n))
             
@@ -80,8 +80,6 @@ class TCC(BotPlugin):
                     falso_positivo_medio = falso_positivo_medio + 1
                 elif (e1 < 0.1) and (e2 < 0.1) and (e3 < 0.1) and (e4 < 0.1) and (e5 < 0.1) and (e6 < 0.1):
                     falso_positivo_medio = falso_positivo_medio + 1
-                #else:
-                    #pass
             elif z < 0.1: 
                 if (e1 > 0.1) and (e2 > 0.1) and (e3 > 0.1) and (e4 > 0.1) and (e5 > 0.1) and (e6 > 0.1):
                     falso_positivo_baixo = falso_positivo_baixo + 1
@@ -110,4 +108,4 @@ class TCC(BotPlugin):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
         self.treinar()
-        self.start_poller(60, self.novos_dados)
+        self.start_poller(3600, self.novos_dados)
