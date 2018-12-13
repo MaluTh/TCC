@@ -30,14 +30,14 @@ class TCC(BotPlugin):
 
         ds = SupervisedDataSet(6, 1)
 
-        self.nn = buildNetwork(6, 6, 1, bias=True)
+        #self.nn = buildNetwork(6, 6, 1, bias=True)
 
         for n, s in zip(entradas, saida):
             ds.addSample(n, s)
 
         trainer = BackpropTrainer(self.nn, ds, learningrate=0.4, momentum=0.3)
 
-        for i in range(0, 300):
+        for i in range(0, 10):
             n = trainer.train()
             #self.warn_admins(str(n))
             
@@ -82,9 +82,11 @@ class TCC(BotPlugin):
                     falso_positivo_medio = falso_positivo_medio + 1
                 #else:
                     #pass
-            else: 
+            elif z < 0.1: 
                 if (e1 > 0.1) and (e2 > 0.1) and (e3 > 0.1) and (e4 > 0.1) and (e5 > 0.1) and (e6 > 0.1):
                     falso_positivo_baixo = falso_positivo_baixo + 1
+            else:
+                pass
             
             if z > 0.5:
                 self.warn_admins('O consumo de recursos está alto em:')
