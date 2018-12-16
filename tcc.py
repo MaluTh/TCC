@@ -107,5 +107,5 @@ class TCC(BotPlugin):
     def activate(self):
         super().activate()
         self.nn = buildNetwork(6, 6, 1, bias=True)
-        #self.treinar()
-        #self.start_poller(3600, self.novos_dados)
+        self.treinar()
+        self.start_poller(3600, self.novos_dados)
